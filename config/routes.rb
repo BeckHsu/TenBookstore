@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   
-  resources :books #,path: 'products'  # 8 routes => 7 actions
+  devise_for :users
+  resources :books ,except: [:new, :create]#,path: 'products'  # 8 routes => 7 actions
   root 'books#index'
 
+  namespace :admin do
+    root 'books#index'
+    resources :books
+  end
 end
