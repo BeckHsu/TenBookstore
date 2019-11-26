@@ -8,7 +8,7 @@ class CreateBooks < ActiveRecord::Migration[6.0]
       t.decimal :sell_price
       t.integer :page_num
       t.string :isbn
-      t.string :isbn3
+      t.string :isbn13
       t.text :description
       t.text :about
       t.text :outline
@@ -16,5 +16,8 @@ class CreateBooks < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
+    add_index :books , :isbn , unique: true
+    add_index :books , :isbn13 , unique: true
+
   end
 end

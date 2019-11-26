@@ -10,8 +10,15 @@
   </head>
 
   <body>
+
+
+  <section class="section">
+  <div class="container"> 
+    <%= render 'shared/flash' if notice %>
     <%= flash[:notice] %>
    
     <%= yield %>
+    </div>
+  </section>
   </body>
 </html>

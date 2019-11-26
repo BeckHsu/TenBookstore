@@ -10,7 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_18_061538) do
+ActiveRecord::Schema.define(version: 2019_11_25_091202) do
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.integer "record_id", null: false
+    t.integer "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
 
   create_table "books", force: :cascade do |t|
     t.string "model"
@@ -20,13 +41,29 @@ ActiveRecord::Schema.define(version: 2019_11_18_061538) do
     t.decimal "sell_price"
     t.integer "page_num"
     t.string "isbn"
-    t.string "isbn3"
+    t.string "isbn13"
     t.text "description"
     t.text "about"
     t.text "outline"
     t.boolean "on_sell"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.date "published_at"
+    t.integer "publisher_id"
+    t.index ["isbn"], name: "index_books_on_isbn", unique: true
+    t.index ["isbn13"], name: "index_books_on_isbn13", unique: true
+    t.index ["publisher_id"], name: "index_books_on_publisher_id"
   end
 
+  create_table "publishers", force: :cascade do |t|
+    t.string "name"
+    t.string "tel"
+    t.string "address"
+    t.text "note"
+    t.boolean "online"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
 end
