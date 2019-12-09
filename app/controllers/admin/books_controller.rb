@@ -1,7 +1,8 @@
-class Admin::BooksController < ApplicationController
+class Admin::BooksController < Admin::BaseController
     before_action :authenticate_user!
     layout 'backend'
     before_action :find_book,only:[:show,:edit,:update,:destroy]    
+   
 
      def index
         # @books = Book.where(on_sell:true).with_attached_cover_image
@@ -52,4 +53,6 @@ class Admin::BooksController < ApplicationController
         #strong parameters
         params.require(:book).permit(:title,:description,:list_price,:sell_price,:page_num,:isbn,:isbn13,:cover_image,:on_sell,:published_at,:publisher_id)
     end
+
+    
 end

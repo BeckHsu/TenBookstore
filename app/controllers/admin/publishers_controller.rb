@@ -1,4 +1,4 @@
-class Admin::PublishersController < ApplicationController
+class Admin::PublishersController < Admin::BaseController
     before_action :authenticate_user!
     layout 'backend'
     before_action :find_publisher,only:[:edit,:update,:destroy]    
