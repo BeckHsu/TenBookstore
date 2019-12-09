@@ -8,6 +8,6 @@ Rails.application.routes.draw do
     root 'books#index'
     resources :books
     resources :publishers, except: [:show]
-
+    
   end
 end
