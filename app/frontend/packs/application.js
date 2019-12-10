@@ -7,3 +7,5 @@ require("channels")
 // import '../stylesheets/index.js'
 import '../stylesheets'
 import '../scripts'
+
+import "controllers"

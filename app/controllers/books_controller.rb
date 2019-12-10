@@ -26,9 +26,15 @@ class BooksController < ApplicationController
     # @comment = current_user.comments.build(comment_params, book: @book)
 
     if @comment.save
-      redirect_to @book, notice: '留言成功'
+      respond_to do |format|
+        format.js 
+        format.html 
+      end
+      # render js: 'alert("hi");'
+      # redirect_to @book, notice: '留言成功'
     else
       # 失敗
+      render js: 'alert("發生錯誤")'
     end
   end
 

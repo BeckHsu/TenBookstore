@@ -13,7 +13,17 @@ Rails.application.routes.draw do
   
 
   root 'books#index'
-  
+
+  namespace :api do
+    resources :books, only: [] do
+      member do
+        post :favorite 
+      end
+    end
+  end
+
+
+
   namespace :admin do
     root 'books#index'
     resources :books
